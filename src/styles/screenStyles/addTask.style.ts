@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   },
 
   plusButton: {
-    backgroundColor: 'black', // same as your theme accent color
+    backgroundColor: 'black', 
     borderRadius: 10,
     borderColor:'#FF8303',
     borderWidth:2,
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 3,
-    elevation: 5, // for Android shadow
+    elevation: 5, 
   },
   
   plusText: {
@@ -42,6 +42,46 @@ const styles = StyleSheet.create({
     fontSize: 26,
     fontWeight: 'bold',
   },
+  taskListContainer: {
+    marginTop: 30,
+  },
+  noTaskContainer: {
+    alignItems: 'center',
+    marginTop: 40,
+  },
+  noTaskText: {
+    color: '#FF8303',
+    fontSize: 18,
+    marginVertical: 10,
+    fontStyle: 'italic',
+  },
+  line: {
+    width: 100,
+    height: 1,
+    backgroundColor: '#FF8303',
+    opacity: 0.5,
+  },
+  taskBox: {
+    backgroundColor: '#242320',
+    borderColor: '#FF8303',
+    borderWidth: 1,
+    borderRadius: 10,
+    padding: 15,
+    marginBottom: 10,
+   
+  },
+  taskTitle: {
+    color: '#F0E3CA',
+    fontSize: 22,
+    marginBottom: 5,
+    fontFamily: 'Roboto', 
+  },
+  taskAbout: {
+    color: '#F0E3CA',
+    fontSize: 14,
+    fontFamily: 'Roboto', 
+  },
+
   
 });
 
