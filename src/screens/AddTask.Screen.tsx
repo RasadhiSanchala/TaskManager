@@ -1,20 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import {
-  View,
-  TouchableOpacity,
-  Text,
-  FlatList,
-} from 'react-native';
+import { View, TouchableOpacity, Text, ScrollView } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Input from '../components/input.tsx';
-import styles from '../styles/screenStyles/addTask.style';
+import Input from '../components/input.tsx';  
+import TaskItem from '../components/TaskItem';  
+import styles from '../styles/screenStyles/addTask.style'; 
+import DeletePopup from '../components/deletePopup.tsx';
 
 const AddTaskScreen = () => {
   const [title, setTitle] = useState('');
   const [about, setAbout] = useState('');
   const [tasks, setTasks] = useState<any[]>([]);
+  const [showPopup, setShowPopup] = useState(false);
+  const [taskToDelete, setTaskToDelete] = useState<string | null>(null);
 
-  // Load tasks from AsyncStorage when the app starts
   useEffect(() => {
     const loadTasks = async () => {
       try {
@@ -30,14 +28,13 @@ const AddTaskScreen = () => {
     loadTasks();
   }, []);
 
-  // Add new task and save to AsyncStorage
   const handleAddTask = async () => {
     if (!title.trim() || !about.trim()) {
-      return; // avoid adding empty task
+      return;
     }
 
     const newTask = {
-      id: Date.now().toString(),
+      id: Date.now().toString(), 
       title,
       about,
     };
@@ -55,12 +52,27 @@ const AddTaskScreen = () => {
     setAbout('');
   };
 
-  const renderItem = ({ item }: any) => (
-    <View style={styles.taskBox}>
-      <Text style={styles.taskTitle}>{item.title}</Text>
-      <Text style={styles.taskAbout}>{item.about}</Text>
-    </View>
-  );
+  const handleDeletePress = (taskId: string) => {
+    setTaskToDelete(taskId);
+    setShowPopup(true);
+  };
+
+
+  const confirmDelete = async () => {
+    if (taskToDelete) {
+      const updatedTasks = tasks.filter(task => task.id !== taskToDelete);
+      setTasks(updatedTasks);
+      await AsyncStorage.setItem('tasks', JSON.stringify(updatedTasks));
+      setTaskToDelete(null);
+      setShowPopup(false);
+    }
+  };
+
+  
+  const cancelDelete = () => {
+    setTaskToDelete(null);
+    setShowPopup(false);
+  };
 
   return (
     <View style={styles.container}>
@@ -83,22 +95,24 @@ const AddTaskScreen = () => {
         </TouchableOpacity>
       </View>
 
-      <View style={styles.taskListContainer}>
+      <ScrollView style={styles.taskListContainer}>
         {tasks.length === 0 ? (
           <View style={styles.noTaskContainer}>
-            <View style={styles.line} />
             <Text style={styles.noTaskText}>No tasks</Text>
-            <View style={styles.line} />
           </View>
         ) : (
-          <FlatList
-            data={tasks}
-            keyExtractor={(item) => item.id}
-            renderItem={renderItem}
-            contentContainerStyle={{ paddingTop: 20 }}
-          />
+          tasks.map((task) => (
+            <TaskItem key={task.id} task={task} onDelete={handleDeletePress} />
+          ))
         )}
-      </View>
+      </ScrollView>
+
+  
+      <DeletePopup
+        visible={showPopup}
+        onConfirm={confirmDelete}
+        onCancel={cancelDelete}
+      />
     </View>
   );
 };
