@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   TouchableOpacity,
   Text,
-  Alert,
   FlatList,
 } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Input from '../components/input.tsx';
 import styles from '../styles/screenStyles/addTask.style';
 
@@ -14,15 +14,42 @@ const AddTaskScreen = () => {
   const [about, setAbout] = useState('');
   const [tasks, setTasks] = useState<any[]>([]);
 
-  const handleAddTask = () => {
-  
+  // Load tasks from AsyncStorage when the app starts
+  useEffect(() => {
+    const loadTasks = async () => {
+      try {
+        const savedTasks = await AsyncStorage.getItem('tasks');
+        if (savedTasks) {
+          setTasks(JSON.parse(savedTasks));
+        }
+      } catch (error) {
+        console.error('Error loading tasks:', error);
+      }
+    };
+
+    loadTasks();
+  }, []);
+
+  // Add new task and save to AsyncStorage
+  const handleAddTask = async () => {
+    if (!title.trim() || !about.trim()) {
+      return; // avoid adding empty task
+    }
+
     const newTask = {
       id: Date.now().toString(),
       title,
       about,
     };
 
-    setTasks([newTask, ...tasks]);
+    const updatedTasks = [newTask, ...tasks];
+    setTasks(updatedTasks);
+
+    try {
+      await AsyncStorage.setItem('tasks', JSON.stringify(updatedTasks));
+    } catch (error) {
+      console.error('Error saving task:', error);
+    }
 
     setTitle('');
     setAbout('');
