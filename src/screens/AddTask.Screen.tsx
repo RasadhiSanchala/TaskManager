@@ -5,6 +5,7 @@ import Input from '../components/input.tsx';
 import TaskItem from '../components/TaskItem';  
 import styles from '../styles/screenStyles/addTask.style'; 
 import DeletePopup from '../components/deletePopup.tsx';
+import EditTaskPopup from '../components/editPopup'; 
 
 const AddTaskScreen = () => {
   const [title, setTitle] = useState('');
@@ -12,6 +13,8 @@ const AddTaskScreen = () => {
   const [tasks, setTasks] = useState<any[]>([]);
   const [showPopup, setShowPopup] = useState(false);
   const [taskToDelete, setTaskToDelete] = useState<string | null>(null);
+  const [editPopupVisible, setEditPopupVisible] = useState(false);
+  const [taskToEdit, setTaskToEdit] = useState<any | null>(null);
 
   useEffect(() => {
     const loadTasks = async () => {
@@ -39,7 +42,6 @@ const AddTaskScreen = () => {
       about,
       completed: false, 
     };
-    
 
     const updatedTasks = [newTask, ...tasks];
     setTasks(updatedTasks);
@@ -58,23 +60,20 @@ const AddTaskScreen = () => {
     const updatedTasks = tasks.map(task =>
       task.id === taskId ? { ...task, completed: !task.completed } : task
     );
-  
-    
+
     const sortedTasks = [
       ...updatedTasks.filter(task => !task.completed),
       ...updatedTasks.filter(task => task.completed),
     ];
-  
+
     setTasks(sortedTasks);
     await AsyncStorage.setItem('tasks', JSON.stringify(sortedTasks));
   };
-  
 
   const handleDeletePress = (taskId: string) => {
     setTaskToDelete(taskId);
     setShowPopup(true);
   };
-
 
   const confirmDelete = async () => {
     if (taskToDelete) {
@@ -86,10 +85,34 @@ const AddTaskScreen = () => {
     }
   };
 
-  
   const cancelDelete = () => {
     setTaskToDelete(null);
     setShowPopup(false);
+  };
+
+  const handleEditPress = (task: any) => {
+    setTaskToEdit(task);
+    setEditPopupVisible(true);
+    
+  };
+
+  const handleSaveEdit = async (editedTitle: string, editedAbout: string) => {
+    if (taskToEdit) {
+      const updatedTasks = tasks.map(task =>
+        task.id === taskToEdit.id
+          ? { ...task, title: editedTitle, about: editedAbout }
+          : task
+      );
+      setTasks(updatedTasks);
+      await AsyncStorage.setItem('tasks', JSON.stringify(updatedTasks));
+      setEditPopupVisible(false);
+      setTaskToEdit(null);
+    }
+  };
+
+  const cancelEdit = () => {
+    setEditPopupVisible(false);
+    setTaskToEdit(null);
   };
 
   return (
@@ -125,18 +148,27 @@ const AddTaskScreen = () => {
               task={task}
               onDelete={handleDeletePress}
               onToggleComplete={handleToggleComplete} 
+              onEdit={handleEditPress} 
             />
           ))
-          
         )}
       </ScrollView>
 
-  
       <DeletePopup
         visible={showPopup}
         onConfirm={confirmDelete}
         onCancel={cancelDelete}
       />
+
+      {taskToEdit && (
+        <EditTaskPopup
+          visible={editPopupVisible}
+          initialTitle={taskToEdit.title}
+          initialAbout={taskToEdit.about}
+          onCancel={cancelEdit}
+          onSave={handleSaveEdit}
+        />
+      )}
     </View>
   );
 };
