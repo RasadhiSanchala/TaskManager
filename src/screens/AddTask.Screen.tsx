@@ -34,10 +34,12 @@ const AddTaskScreen = () => {
     }
 
     const newTask = {
-      id: Date.now().toString(), 
+      id: Date.now().toString(),
       title,
       about,
+      completed: false, 
     };
+    
 
     const updatedTasks = [newTask, ...tasks];
     setTasks(updatedTasks);
@@ -51,6 +53,22 @@ const AddTaskScreen = () => {
     setTitle('');
     setAbout('');
   };
+
+  const handleToggleComplete = async (taskId: string) => {
+    const updatedTasks = tasks.map(task =>
+      task.id === taskId ? { ...task, completed: !task.completed } : task
+    );
+  
+    
+    const sortedTasks = [
+      ...updatedTasks.filter(task => !task.completed),
+      ...updatedTasks.filter(task => task.completed),
+    ];
+  
+    setTasks(sortedTasks);
+    await AsyncStorage.setItem('tasks', JSON.stringify(sortedTasks));
+  };
+  
 
   const handleDeletePress = (taskId: string) => {
     setTaskToDelete(taskId);
@@ -102,8 +120,14 @@ const AddTaskScreen = () => {
           </View>
         ) : (
           tasks.map((task) => (
-            <TaskItem key={task.id} task={task} onDelete={handleDeletePress} />
+            <TaskItem
+              key={task.id}
+              task={task}
+              onDelete={handleDeletePress}
+              onToggleComplete={handleToggleComplete} 
+            />
           ))
+          
         )}
       </ScrollView>
 
