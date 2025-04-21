@@ -11,19 +11,33 @@ interface TaskItemProps {
   };
   onDelete: (id: string) => void;
   onToggleComplete: (id: string) => void;
+  onEdit: (task: any) => void;
 }
 
-const TaskItem: React.FC<TaskItemProps> = ({ task, onDelete, onToggleComplete }) => {
+const TaskItem: React.FC<TaskItemProps> = ({
+  task,
+  onDelete,
+  onToggleComplete,
+  onEdit,
+}) => {
   const [showEdit, setShowEdit] = useState(false);
 
   return (
     <View>
-      {/* Main task content */}
-      <TouchableOpacity onPress={() => setShowEdit(!showEdit)} activeOpacity={1}>
+      
+      <TouchableOpacity
+        onPress={() => setShowEdit(!showEdit)} 
+        activeOpacity={1}
+      >
         <View style={styles.taskBox}>
           <View style={styles.taskContent}>
-            <TouchableOpacity style={styles.checkBox} onPress={() => onToggleComplete(task.id)}>
-              <Text style={styles.checkText}>{task.completed ? '✓' : ''}</Text>
+            <TouchableOpacity
+              style={styles.checkBox}
+              onPress={() => onToggleComplete(task.id)}
+            >
+              <Text style={styles.checkText}>
+                {task.completed ? '✓' : ''}
+              </Text>
             </TouchableOpacity>
 
             <View style={styles.taskDetails}>
@@ -48,14 +62,23 @@ const TaskItem: React.FC<TaskItemProps> = ({ task, onDelete, onToggleComplete })
         </View>
       </TouchableOpacity>
 
-      {/* Extra buttons below the box */}
+
       {showEdit && (
         <View style={styles.actionRow}>
-          <TouchableOpacity style={styles.editBox}>
-            <Image source={require('../assets/Edit.png')} style={styles.editImage} />
+          <TouchableOpacity
+            style={styles.editBox}
+            onPress={() => onEdit(task)} 
+          >
+            <Image
+              source={require('../assets/Edit.png')}
+              style={styles.editImage}
+            />
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.closeBoxOutside} onPress={() => onDelete(task.id)}>
+          <TouchableOpacity
+            style={styles.closeBoxOutside}
+            onPress={() => onDelete(task.id)} 
+          >
             <Text style={styles.closeText}>x</Text>
           </TouchableOpacity>
         </View>
