@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     marginTop: 40,
   },
   noTaskText: {
-    color: '#FF8303',
+    color: 'white',
     fontSize: 18,
     marginVertical: 10,
     fontStyle: 'italic',
