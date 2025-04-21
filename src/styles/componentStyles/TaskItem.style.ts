@@ -51,9 +51,15 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#F0E3CA',
   },
+
   closeBox: {
-    width: 32,
-    height: 32,
+    display: 'none', 
+  },
+
+  
+  closeBoxOutside: {
+    width: 36,
+    height: 36,
     backgroundColor: '#1B1A17',
     borderColor: '#A35709',
     borderWidth: 2,
@@ -69,6 +75,30 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     includeFontPadding: false,
     textAlignVertical: 'center',
+  },
+
+  editBox: {
+    width: 36,
+    height: 36,
+    backgroundColor: '#1B1A17',
+    borderColor: '#A35709',
+    borderWidth: 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 6,
+  },
+  editImage: {
+    width: 20,
+    height: 20,
+    tintColor: '#F0E3CA',
+  },
+
+  actionRow: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    marginBottom: 20,
+    gap: 10, 
   },
 });
 
