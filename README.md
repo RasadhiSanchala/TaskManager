@@ -1,97 +1,68 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# 📝 MyTasko - React Native To-Do List App
 
-# Getting Started
+A simple yet beautifully designed **To-Do List** mobile application developed using **React Native CLI**, **TypeScript**, and **React Hooks** for state management and **AsyncStorage** for persistent data.  
+This app helps users easily manage daily tasks with features like adding, deleting,editing and marking tasks as complete — all while following Material Design principles.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
 
-## Step 1: Start Metro
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+## 🎥 Demo & Design
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+📹 **Demo Video**: [Watch here](https://klnaclk-my.sharepoint.com/personal/sanchal-se21021_stu_kln_ac_lk/_layouts/15/stream.aspx?id=%2Fpersonal%2Fsanchal-se21021_stu_kln_ac_lk%2FDocuments%2FMobile%20App%20Development%20-%20To-do%20APP%2FTo-do%20App%2Emp4)  
+🎨 **Figma Design (strictly followed)**: [Figma Link](https://www.figma.com/design/kAsgSdWrAHEBa6UphlJ97k/Mobile-To-Do-App---SE-2021-021?node-id=0-1&t=DKziQMdqAPjB9Fip-1)
 
-```sh
-# Using npm
-npm start
+---
 
-# OR using Yarn
-yarn start
-```
+## ✅ Features
 
-## Step 2: Build and run your app
+- ✏️ **Add Tasks** – Add new to-dos with a simple input
+- 🗑️ **Delete Tasks** – Remove tasks from the list instantly
+- ✏️ **Edit Tasks** – Edit task in the new popup in the list instantly
+- ✅ **Mark as Complete** – Toggle completion with a checkbox
+- 💾 **Persistent Storage** – Tasks are saved locally using `AsyncStorage`
+- 📱 **Material-Inspired UI** – Custom styled using React Native styles
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+---
 
-### Android
+## 🛠️ Tech Stack
 
-```sh
-# Using npm
-npm run android
+- React Native CLI
+- TypeScript
+- React Hooks (`useState`, `useEffect`) for state management
+- AsyncStorage for persistent data
+- Functional Components + React Hooks
 
-# OR using Yarn
-yarn android
-```
+---
 
-### iOS
+## 📦 Setup Instructions
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+### 1. Clone the Repository
+git clone https://github.com/RasadhiSanchala/Task-Manager-App.git
+cd Task-Manager-App
+### 2. Install Dependencies
+npm install
+### 3. Run the App
+For Android:
+npx react-native run-android
+For iOS (Mac only):
+npx react-native run-ios
+Make sure to start the Metro bundler if it doesn’t start automatically:
+npx react-native start
 
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+## 📱 How to Use
+Type a new task in the input field.
+Tap "+" to add it to the list.
+Tap the checkbox to mark it as complete.
+Tap the trash icon to delete a task.
+Tap the edit icon to edit a task.
+And you can navigate each screen through navigation bar.
+Your tasks will stay saved locally — even after closing the app!
 
-```sh
-bundle install
-```
 
-Then, and every time you update your native dependencies, run:
+Happy Tasking with MyTasko! 🚀💙
 
-```sh
-bundle exec pod install
-```
+Let me know when you add your GitHub link and demo video — I’ll patch them into the final copy for you. Want me to help prep the email to submit too? 😌📩
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
 
-```sh
-# Using npm
-npm run ios
 
-# OR using Yarn
-yarn ios
-```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
-
-## Step 3: Modify your app
-
-Now that you have successfully run the app, let's make changes!
-
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
-
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
-
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
