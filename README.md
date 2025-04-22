@@ -74,7 +74,6 @@ Your tasks will stay saved locally — even after closing the app!
 
 Happy Tasking with MyTasko! 🚀💙
 
-Let me know when you add your GitHub link and demo video — I’ll patch them into the final copy for you. Want me to help prep the email to submit too? 😌📩
 
 
 
