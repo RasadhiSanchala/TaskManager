@@ -37,25 +37,39 @@ This app helps users easily manage daily tasks with features like adding, deleti
 
 ### 1. Clone the Repository
 git clone https://github.com/RasadhiSanchala/Task-Manager-App.git
+
 cd Task-Manager-App
+
+
 ### 2. Install Dependencies
 npm install
+
+
 ### 3. Run the App
 For Android:
 npx react-native run-android
+
 For iOS (Mac only):
 npx react-native run-ios
+
 Make sure to start the Metro bundler if it doesn’t start automatically:
 npx react-native start
 
 ## 📱 How to Use
 Type a new task in the input field.
+
 Tap "+" to add it to the list.
+
 Tap the checkbox to mark it as complete.
+
 Tap the trash icon to delete a task.
+
 Tap the edit icon to edit a task.
+
 And you can navigate each screen through navigation bar.
+
 Your tasks will stay saved locally — even after closing the app!
+
 
 
 Happy Tasking with MyTasko! 🚀💙
